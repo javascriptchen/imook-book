@@ -6,18 +6,16 @@
 
 <script>
 import Epub from "epubjs";
-import { mapGetters } from "vuex";
+import { ebookMixin } from "utils/mixin.js";
 global.ePub = Epub;
 export default {
   data() {
     return {};
   },
-  computed: {
-    ...mapGetters(["fileName"])
-  },
+  mixins: [ebookMixin],
   mounted() {
     const fileName = this.$route.params.fileName.split("|").join("/");
-    this.$store.dispatch("setFileName", fileName).then(() => {
+    this.setFileName(fileName).then(() => {
       this.initEpub();
     });
   },
@@ -25,12 +23,20 @@ export default {
     prevPage() {
       if (this.rendition) {
         this.rendition.prev();
+        this.hideMenuVisible();
       }
     },
     nextPage() {
       if (this.rendition) {
         this.rendition.next();
+        this.hideMenuVisible();
       }
+    },
+    hideMenuVisible() {
+      this.setMenuVisible(false);
+    },
+    toggleTitleAndMenu() {
+      this.setMenuVisible(!this.menuVisible);
     },
     initEpub() {
       const url = "http://192.168.61.101:8088/epub/" + this.fileName + ".epub";
@@ -48,12 +54,12 @@ export default {
       this.rendition.on("touchend", event => {
         const offsetX = event.changedTouches[0].clientX - this.touchStartX;
         const time = event.timeStamp - this.touchStartTime;
-        console.log(offsetX, time);
         if (offsetX > 50 && time < 500) {
           this.prevPage();
-        }
-        if (offsetX < 50 && time < 500) {
+        } else if (offsetX < -50 && time < 500) {
           this.nextPage();
+        } else {
+          this.toggleTitleAndMenu();
         }
       });
     }

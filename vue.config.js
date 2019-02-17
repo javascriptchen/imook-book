@@ -15,6 +15,7 @@ module.exports = {
     // 添加别名
     config.resolve.alias
       .set("@", resolve("src"))
+      .set("utils", resolve("src/utils"))
       .set("assets", resolve("src/assets"))
       .set("components", resolve("src/components"));
   },

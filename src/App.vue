@@ -17,7 +17,6 @@ export default {};
   z-index: 0;
   width: 100%;
   height: 100%;
-  background: #7d8188;
   overflow: hidden;
 }
 </style>
