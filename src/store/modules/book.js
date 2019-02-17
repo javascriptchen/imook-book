@@ -1,18 +1,18 @@
 const book = {
   state: {
-    test: 1
+    fileName: 1
   },
   mutations: {
-    "SET_TEST": (state, newTest) => {
-      state.test = newTest;
+    "SET_FILENAME": (state, newfileName) => {
+      state.fileName = newfileName;
     }
   },
   actions: {
-    setTest: ({
+    setFileName: ({
       commit,
       state
-    }, newTest) => {
-      return commit("SET_TEST", newTest);
+    }, newfileName) => {
+      return commit("SET_FILENAME", newfileName);
     }
   }
 };

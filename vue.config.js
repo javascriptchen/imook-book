@@ -65,7 +65,7 @@ module.exports = {
       postcss: {
         plugins: [
           require('postcss-pxtorem')({
-            rootValue: 75, // 换算的基数
+            rootValue: 40, // 换算的基数
             selectorBlackList: ['weui', 'el'], // 忽略转换正则匹配项
             propList: ['*']
           })
