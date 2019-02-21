@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import EbookReader from "components/ebook/ebookReader.vue";
-import EbookTitle from "components/ebook/ebookTitle.vue";
-import EbookMenu from "components/ebook/ebookMenu.vue";
+import EbookReader from "components/ebook/EbookReader.vue";
+import EbookTitle from "components/ebook/EbookTitle.vue";
+import EbookMenu from "components/ebook/EbookMenu.vue";
 export default {
   data() {
     return {};
