@@ -4,10 +4,7 @@
       class="setting-wrapper"
       v-show="menuVisible && settingVisible===0"
     >
-      <div
-        class="setting-font-size"
-        v-if="showTag === 0"
-      >
+      <div class="setting-font-size">
         <div
           :style="{fontSize: fontSizeList[0].fontSize + 'px'}"
           class="preview"
@@ -36,18 +33,35 @@
           class="preview"
         >A</div>
       </div>
+      <div
+        @click="showFontFamilyPopup"
+        class="setting-font-family"
+      >
+        {{defaultFontFamily}}
+        <i class="arrow-right icon"></i>
+      </div>
     </div>
   </transition>
 </template>
 
 <script type="text/ecmascript-6">
 import { ebookMixin } from "@/utils/mixin";
-
+import { FONT_SIZE_LIST } from "@/utils/book.js";
 export default {
+  data: function() {
+    return {
+      fontSizeList: FONT_SIZE_LIST
+    };
+  },
   mixins: [ebookMixin],
   methods: {
-    isSelected(item) {
-      return this.defaultFontFamily === item.font;
+    setFontSize(fontSize) {
+      this.setDefaultFontSize(fontSize);
+      this.currentBook.rendition.themes.fontSize(fontSize);
+    },
+    showFontFamilyPopup() {
+      // this.setFontFamilyVisible(true);
+      console.log("ok");
     }
   }
 };
@@ -57,74 +71,96 @@ export default {
 @import "../../assets/styles/global";
 
 .setting-wrapper {
-    position: absolute;
-    bottom: 48px;
-    left: 0;
-    z-index: 101;
-    width: 100%;
-    height: 60px;
-    background: white;
-    box-shadow: 0 -8px 8px rgba(0, 0, 0, 0.15);
-    .setting-font-size {
+  @include flex();
+  position: absolute;
+  bottom: 48px;
+  left: 0;
+  z-index: 101;
+  width: 100%;
+  height: 60px;
+  background: white;
+  box-shadow: 0 -8px 8px rgba(0, 0, 0, 0.15);
+  .setting-font-size {
+    flex: 2;
+    display: flex;
+    height: 100%;
+    .preview {
+      flex: 0 0 40px;
+      @include center;
+    }
+    .select {
       display: flex;
-      height: 100%;
-      .preview {
-        flex: 0 0 40px;
-        @include center;
-      }
-      .select {
-        display: flex;
+      flex: 1;
+      .select-wrapper {
         flex: 1;
-        .select-wrapper {
-          flex: 1;
-          display: flex;
-          align-items: center;
-          &:first-child {
-            .line {
-              &:first-child {
-                border-top: none;
-              }
-            }
-          }
-          &:last-child {
-            .line {
-              &:last-child {
-                border-top: none;
-              }
-            }
-          }
+        display: flex;
+        align-items: center;
+        &:first-child {
           .line {
-            flex: 1;
-            height: 0;
-            border-top: 1px solid #ccc;
+            &:first-child {
+              border-top: none;
+            }
           }
-          .point-wrapper {
-            position: relative;
-            flex: 0 0 0;
-            width: 0;
-            height: 7px;
-            border-left: 1px solid #ccc;
-            .point {
-              position: absolute;
-              top: -8px;
-              left: -10px;
-              width: 20px;
-              height: 20px;
+        }
+        &:last-child {
+          .line {
+            &:last-child {
+              border-top: none;
+            }
+          }
+        }
+        .line {
+          flex: 1;
+          height: 0;
+          border-top: 1px solid #ccc;
+        }
+        .point-wrapper {
+          position: relative;
+          flex: 0 0 0;
+          width: 0;
+          height: 7px;
+          border-left: 1px solid #ccc;
+          .point {
+            position: absolute;
+            top: -8px;
+            left: -10px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: white;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
+            @include center;
+            .small-point {
+              width: 5px;
+              height: 5px;
+              background: black;
               border-radius: 50%;
-              background: white;
-              border: 1px solid #ccc;
-              box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
-              @include center;
-              .small-point {
-                width: 5px;
-                height: 5px;
-                background: black;
-                border-radius: 50%;
-              }
             }
           }
         }
       }
     }
   }
+  .setting-font-family {
+    position: relative;
+    flex: 1;
+    @include center;
+    font-size: 14px;
+
+    .arrow-right.icon:before {
+      @include center;
+      content: "";
+      position: absolute;
+      left: 57%;
+      top: 6px;
+      width: 6px;
+      height: 6px;
+      border-top: solid 1px currentColor;
+      border-right: solid 1px currentColor;
+      -webkit-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+  }
+}
 </style>

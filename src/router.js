@@ -13,7 +13,7 @@ export default new Router({
       component: () => import("./views/ebook/index.vue"),
       children: [{
         path: ":fileName",
-        component: () => import("./components/ebook/ebookReader.vue")
+        component: () => import("./components/ebook/EbookReader")
       }]
     }
   ]

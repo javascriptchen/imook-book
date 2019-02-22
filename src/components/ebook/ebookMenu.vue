@@ -2,7 +2,7 @@
   <div class="menu-bar">
     <transition name="slide-up">
       <div
-        :class="{'hide-box-shadow':menuVisible}"
+        :class="{'hide-box-shadow':!menuVisible||settingVisible >= 0}"
         class="menu-wrapper"
         v-show="menuVisible"
       >
@@ -32,15 +32,22 @@
         </div>
       </div>
     </transition>
+    <EbookSettingFont></EbookSettingFont>
   </div>
 </template>
 
 <script>
 import { ebookMixin } from "utils/mixin.js";
+import EbookSettingFont from "./EbookSettingFont";
 export default {
   mixins: [ebookMixin],
   methods: {
-    showSetting(key) {}
+    showSetting(key) {
+      this.setSettingVisible(key);
+    }
+  },
+  components: {
+    EbookSettingFont
   }
 };
 </script>
@@ -58,6 +65,7 @@ export default {
     height: 48px;
     box-shadow: 0 -8px 8px rgba(0, 0, 0, .15);
     font-size: 22px;
+    background: #fff;
     &.hide-box-shadow {
       box-shadow: none;
     }
