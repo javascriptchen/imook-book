@@ -32,13 +32,16 @@
         </div>
       </div>
     </transition>
-    <EbookSettingFont></EbookSettingFont>
+    <ebook-setting-font></ebook-setting-font>
+    <ebook-setting-font-popup></ebook-setting-font-popup>
   </div>
 </template>
 
 <script>
 import { ebookMixin } from "utils/mixin.js";
 import EbookSettingFont from "./EbookSettingFont";
+import EbookSettingFontPopup from "./EbookSettingFontPopup";
+
 export default {
   mixins: [ebookMixin],
   methods: {
@@ -47,7 +50,8 @@ export default {
     }
   },
   components: {
-    EbookSettingFont
+    EbookSettingFont,
+    EbookSettingFontPopup
   }
 };
 </script>
@@ -55,29 +59,29 @@ export default {
 <style lang='scss' scoped>
 @import "../../assets/styles/global";
 
-  .menu-wrapper {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    z-index: 200;
-    display: flex;
-    width: 100%;
-    height: 48px;
-    box-shadow: 0 -8px 8px rgba(0, 0, 0, .15);
-    font-size: 22px;
-    background: #fff;
-    &.hide-box-shadow {
-      box-shadow: none;
+.menu-wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 200;
+  display: flex;
+  width: 100%;
+  height: 48px;
+  box-shadow: 0 -8px 8px rgba(0, 0, 0, 0.15);
+  font-size: 22px;
+  background: #fff;
+  &.hide-box-shadow {
+    box-shadow: none;
+  }
+  .icon-wrapper {
+    flex: 1;
+    @include center;
+    .icon-progress {
+      font-size: 24px;
     }
-    .icon-wrapper {
-      flex: 1;
-      @include center;
-      .icon-progress {
-        font-size: 24px;
-      }
-      .icon-A {
-        font-size: 20px;
-      }
+    .icon-A {
+      font-size: 20px;
     }
   }
+}
 </style>

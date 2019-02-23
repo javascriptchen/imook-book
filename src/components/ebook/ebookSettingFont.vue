@@ -60,8 +60,7 @@ export default {
       this.currentBook.rendition.themes.fontSize(fontSize);
     },
     showFontFamilyPopup() {
-      // this.setFontFamilyVisible(true);
-      console.log("ok");
+      this.setFontFamilyVisible(true);
     }
   }
 };
