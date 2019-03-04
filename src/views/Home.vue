@@ -1,18 +1,28 @@
+/*
+ * @Author: chenchen
+ * @Date: 2019-03-04 01:36:06
+ * @Last Modified by: chenchen
+ * @Last Modified time: 2019-03-04 01:37:24
+ */
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div id="read"></div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import Epub from "epubjs";
+global.ePub = Epub;
 export default {
-  name: 'home',
-  components: {
-    HelloWorld
+  mounted() {
+    this.book = new Epub(
+      "http://192.168.61.100:8088/epub/Biomedicine/2014_Book_Self-ReportedPopulationHealthA.epub"
+    );
+    this.book.renderTo("read", {
+      width: window.innerWidth,
+      height: window.innerHeight,
+      method: "default"
+    }).display();
   }
-}
+};
 </script>
