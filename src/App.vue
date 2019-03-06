@@ -4,11 +4,7 @@
   </div>
 </template>
 <script>
-export default {
-  mounted() {
-    this.$store.dispatch("setTest", 10);
-  }
-};
+export default {};
 document.addEventListener("DOMContentLoaded", () => {
   let fontSize = window.innerWidth / 10;
   fontSize = fontSize > 50 ? 50 : fontSize;
@@ -18,4 +14,9 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 <style>
+#app {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
 </style>

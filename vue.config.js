@@ -1,8 +1,8 @@
 /*
  * @Author: chenchen 
  * @Date: 2019-03-04 01:35:57 
- * @Last Modified by:   chenchen 
- * @Last Modified time: 2019-03-04 01:35:57 
+ * @Last Modified by: chenchen
+ * @Last Modified time: 2019-03-04 23:24:28
  */
 
 function resolve (dir) {
@@ -10,6 +10,6 @@ function resolve (dir) {
 }
 
 module.exports = {
-  baseUrl: process.env.NODE_ENV === 'production' ?
+  publicPath: process.env.NODE_ENV === 'production' ?
     './' : '/'
 }
